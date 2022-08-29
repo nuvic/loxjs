@@ -168,12 +168,12 @@ class Scanner {
            c == '_';
   }
 
-  isDigit(c) {
-    return c >= '0' && c <= '9';
-  }
-
   isAlphaNumeric(c) {
     return this.isAlpha(c) || this.isDigit(c);
+  }
+
+  isDigit(c) {
+    return c >= '0' && c <= '9';
   }
 
   isAtEnd() {
@@ -192,10 +192,6 @@ class Scanner {
 
   addTokenWithLiteral(type, literal) {
     const text = this.source.substring(this.start, this.current);
-    // console.log(type);
-    // console.log(text);
-    // console.log(literal);
-    // console.log(this.line);
     this.tokens.push(
       new Token({
         type: type,
