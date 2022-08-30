@@ -14,7 +14,7 @@ class Lox {
     const args = argv.slice(2);
 
     if (args.length > 1) {
-      console.log("Usage: node src/index.js [script]")
+      console.log("Usage: node src/main.js [script]")
       process.exit(9);
     } else if (args.length == 1) {
       this.runFile(args[0]);
