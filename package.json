@@ -5,7 +5,11 @@
   "main": "src/main.js",
   "type": "module",
   "scripts": {
+    "test": "node --test"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
 }
