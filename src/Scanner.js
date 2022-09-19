@@ -81,7 +81,7 @@ class Scanner {
         break;
 
       case '\n':
-        line++;
+        this.line++;
         break;
 
       case '"': this.string(); break;
