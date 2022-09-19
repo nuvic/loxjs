@@ -2,6 +2,8 @@
 
 This repo is a JS port of Bob Nystrom's amazing book [Crafting Interpreters](http://www.craftinginterpreters.com/).
 
+▶️ If you're interested in learning how it works, check out my youtube series ["Making a programming language with JavaScript"](https://www.youtube.com/playlist?list=PL83wNvo6TbPjdQI2bvGAe-VjROaeoTC5P)
+
 Table of contents:
 1. [lox code](#lox)
 2. [Running lox](#running-lox)
