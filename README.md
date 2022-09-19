@@ -5,6 +5,7 @@ This repo is a JS port of Bob Nystrom's amazing book [Crafting Interpreters](htt
 Table of contents:
 1. [lox code](#lox)
 2. [Running lox](#running-lox)
+3. [tests](#running-tests)
 
 ## lox
 
@@ -77,11 +78,19 @@ There are 2 ways to run lox code:
 - from a file
 
 To run it in a REPL:
-```bash
+```console
 > node src/main.js
 ```
 
 To run it from a file:
-```bash
+```console
 > node src/main.js your_file.lox
+```
+
+## Running tests
+
+Requires `Node 18` to run tests.
+
+```console
+> node --test
 ```
