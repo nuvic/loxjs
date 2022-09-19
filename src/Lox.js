@@ -3,6 +3,9 @@ import fs from 'fs';
 import readline from 'node:readline';
 
 import { Scanner } from './Scanner.js';
+import { TokenType } from './TokenType.js';
+import { Parser } from './Parser.js';
+import { AstPrinter } from './AstPrinter.js';
 
 class Lox {
   constructor() {
@@ -50,10 +53,13 @@ class Lox {
   static run(source) {
     const scanner = new Scanner(source);
     const tokens = scanner.scanTokens();
+    const parser = new Parser(tokens);
+    const expression = parser.parse();
 
-    for (let t of tokens) {
-      console.log(t);
-    }
+    // Stop if there was a syntax error.
+    if (this.hadError) return;
+
+    console.log(new AstPrinter().print(expression));
   }
 
   static error(line, message) {
@@ -68,6 +74,13 @@ class Lox {
     this.hadError = true;
   }
 
+  static parseError(token, message) {
+    if (token.type == TokenType.EOF) {
+      this.report(token.line, " at end", message)
+    } else {
+      this.report(token.line, ` at '${token.lexeme}'`, message);
+    }
+  }
 }
 
 export { Lox };
