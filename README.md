@@ -4,6 +4,11 @@ This repo is a JS port of Bob Nystrom's amazing book [Crafting Interpreters](htt
 
 ▶️ If you're interested in learning how it works, check out my youtube series ["Making a programming language with JavaScript"](https://www.youtube.com/playlist?list=PL83wNvo6TbPjdQI2bvGAe-VjROaeoTC5P)
 
+There are branches that correspond to each chapter of the book.
+- [Chp4 - Scannning](https://github.com/nuvic/loxjs/tree/chp4.scanners)
+- [Chp5 - Representing Code](https://github.com/nuvic/loxjs/tree/chp5)
+- [Chp6 - Parsing Expressions](https://github.com/nuvic/loxjs/tree/chp6)
+
 Table of contents:
 1. [lox code](#lox)
 2. [Running lox](#running-lox)
