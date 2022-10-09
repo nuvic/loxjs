@@ -5,11 +5,14 @@ import readline from 'node:readline';
 import { Scanner } from './Scanner.js';
 import { TokenType } from './TokenType.js';
 import { Parser } from './Parser.js';
-import { AstPrinter } from './AstPrinter.js';
+import { Interpreter } from './Interpreter.js';
 
 class Lox {
+  static interpreter = new Interpreter();
+
   constructor() {
     this.hadError = false;
+    this.hadRunTimeError = false;
   }
 
   static main() {
@@ -30,7 +33,7 @@ class Lox {
     const data = fs.readFileSync(source, 'utf8');
     this.run(data);
 
-    if (this.hadError) process.exit(1);
+    if (this.hadError || this.hadRunTimeError) process.exit(1);
   }
 
   static runPrompt() {
@@ -59,11 +62,16 @@ class Lox {
     // Stop if there was a syntax error.
     if (this.hadError) return;
 
-    console.log(new AstPrinter().print(expression));
+    this.interpreter.interpret(expression);
   }
 
   static error(line, message) {
     this.report(line, "", message);
+  }
+
+  static runtimeError(error) {
+    console.log(error);
+    this.hadRunTimeError = true;
   }
 
   static report(line, where, message) {
