@@ -18,10 +18,19 @@ class GenerateAst {
     this.outputDir = args[0];
 
     this.defineAst(this.outputDir, "Expr", [
+      ["Assign", "name, value"],
       ["Binary", "left, operator, right"],
       ["Grouping", "expression"],
       ["Literal", "value"],
-      ["Unary", "operator, right"]
+      ["Unary", "operator, right"],
+      ["Variable", "name"]
+    ]);
+
+    this.defineAst(this.outputDir, "Stmt", [
+      ["Block", "statements"],
+      ["Expression", "expression"],
+      ["Print", "expression"],
+      ["Var", "name, initializer"]
     ]);
   }
 

@@ -1,14 +1,22 @@
 import { Lox } from './Lox.js'
 import { TokenType } from './TokenType.js';
 import { RuntimeError } from './RuntimeError.js';
+import { Environment } from './Environment.js';
 
 class Interpreter {
-  interpret(expression) {
-    try {
-      const value = this.evaluate(expression);
-      console.log(value.toString());
+  constructor() {
+    this.environment = new Environment;
+  }
 
-      return value;
+  interpret(statements) {
+    const values = [];
+
+    try {
+      for (let stmt of statements) {
+        values.push(this.execute(stmt));
+      }
+
+      return values;
     } catch (error) {
       Lox.runtimeError(error);
     }
@@ -20,6 +28,58 @@ class Interpreter {
   // visitor implementation
   evaluate(expr) {
     return expr.accept(this);
+  }
+
+  execute(stmt) {
+    return stmt.accept(this);
+  }
+
+  executeBlock(statements, newEnv) {
+    const previous = this.environment;
+    
+    try {
+      this.environment = newEnv;
+
+      for (let stmt of statements) {
+        this.execute(stmt);
+      }
+    } finally {
+      // throw away the new environment in this block at the end
+      this.environment = previous;
+    }
+  }
+
+  visitBlockStmt(stmt) {
+    return this.executeBlock(stmt.statements, new Environment(this.environment));
+  }
+
+  visitExpressionStmt(stmt) {
+    return this.evaluate(stmt.expression);
+  }
+
+  visitPrintStmt(stmt) {
+    const value = this.evaluate(stmt.expression);
+    console.log(value);
+    return value;
+  }
+
+  visitVarStmt(stmt) {
+    let value = null;
+    if (stmt.initializer != null) {
+      value = this.evaluate(stmt.initializer);
+    }
+
+    return this.environment.define(stmt.name.lexeme, value);
+  }
+
+  visitAssignExpr(expr) {
+    const value = this.evaluate(expr.value);
+    this.environment.assign(expr.name, value);
+    return value;
+  }
+
+  visitVariableExpr(expr) {
+    return this.environment.get(expr.name);
   }
 
   visitLiteralExpr(expr) {
