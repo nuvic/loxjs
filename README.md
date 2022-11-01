@@ -9,6 +9,7 @@ There are branches that correspond to each chapter of the book.
 2. [Representing Code](https://github.com/nuvic/loxjs/tree/chp5) (chp5 in the book) (Part 2 on YouTube)
 3. [Parsing Expressions](https://github.com/nuvic/loxjs/tree/chp6) (chp6 in the book) (Part 3 on YouTube)
 4. [Evaluating Expressions](https://github.com/nuvic/loxjs/tree/chp7) (chp7 in the book) (Part 4 on YouTube)
+4. [Statements and State](https://github.com/nuvic/loxjs/tree/chp8) (chp8 in the book) (Part 5 on YouTube)
 
 Table of contents:
 1. [lox code](#lox)
